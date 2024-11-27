@@ -4,12 +4,12 @@ export async function GET() {
   const config = {
     config: {
       version: "0.0.0",
-      name: "Frames v2 Demo",
-      icon: `${appUrl}/icon.png`,
-      splashImage: `${appUrl}/splash.png`,
-      splashBackgroundColor: "#f7f7f7",
+      name: "College Football v2 Frame",
+      icon: "https://www.scoreb.site/og-image.png",
+      splashImage: "https://www.scoreb.site/og-image.png",
+      splashBackgroundColor: "#0F172A",
       homeUrl: appUrl,
-      fid: 0,
+      fid: 319054,
       key: "",
       signature: "",
     },
