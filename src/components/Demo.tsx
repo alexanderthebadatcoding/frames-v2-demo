@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState } from "react";
-import sdk, { type FrameContext } from "@farcaster/frame-sdk";
+import sdk from "@farcaster/frame-sdk";
 import Scoreboard from "./scoreboard";
 
 import { Button } from "~/components/ui/Button";
@@ -8,12 +8,10 @@ import { Button } from "~/components/ui/Button";
 
 export default function Demo() {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
-  const [context, setContext] = useState<FrameContext>();
   const [isContextOpen, setIsContextOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
-      setContext(await sdk.context);
       sdk.actions.ready();
     };
     if (sdk && !isSDKLoaded) {
@@ -33,11 +31,6 @@ export default function Demo() {
   const toggleContext = useCallback(() => {
     setIsContextOpen((prev) => !prev);
   }, []);
-
-  const renderError = (error: Error | null) => {
-    if (!error) return null;
-    return <div className="text-red-500 text-xs mt-1">{error.message}</div>;
-  };
 
   if (!isSDKLoaded) {
     return <div>Loading...</div>;

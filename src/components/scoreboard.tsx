@@ -64,19 +64,6 @@ type Game = {
   }>;
 };
 
-// Function to find the team abbreviation by team ID
-function findTeamAbbreviation(
-  competitors: Game["competitions"][0]["competitors"],
-  teamId: string
-) {
-  for (const competitor of competitors) {
-    if (competitor.team.id === teamId) {
-      return competitor.team.shortDisplayName;
-    }
-  }
-  return "Unknown";
-}
-
 export default function Scoreboard() {
   const [games, setGames] = useState<Game[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -115,13 +102,6 @@ export default function Scoreboard() {
         {games.map((game) => {
           const competition = game.competitions?.[0];
           const situation = competition?.situation;
-          const possessionTeamAbbreviation = situation
-            ? findTeamAbbreviation(
-                competition.competitors,
-                situation.possession
-              )
-            : null;
-
           return (
             <div
               key={game.id}
