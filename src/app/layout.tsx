@@ -3,10 +3,33 @@ import type { Metadata } from "next";
 import "~/app/globals.css";
 import { Providers } from "~/app/providers";
 
-export const metadata: Metadata = {
-  title: "Scoreboard Demo",
-  description: "A Farcaster Frames v2 Scoreboard app",
+const frame = {
+  version: "next",
+  imageUrl: "https://www.scoreb.site/og-image.png",
+  button: {
+    title: "See CFB Scores",
+    action: {
+      type: "launch_frame",
+      name: "Scoreboard Demo",
+      url: "https://scoreframe.vercel.app",
+      splashImageUrl: "https://www.scoreb.site/og-image.png",
+      splashBackgroundColor: "#f7f7f7",
+    },
+  },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Farcaster Frames v2 Demo",
+    openGraph: {
+      title: "Farcaster Frames v2 Demo",
+      description: "A Farcaster Frames v2 demo app.",
+    },
+    other: {
+      "fc:frame": JSON.stringify(frame),
+    },
+  };
+}
 
 export default function RootLayout({
   children,
