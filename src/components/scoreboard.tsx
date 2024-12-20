@@ -135,14 +135,13 @@ export default function Scoreboard() {
                   >
                     <div className="flex items-center">
                       <Image
-                        src={team.team.logo || "https://www.scoreb.site/NA.png"}
+                        src={team.team.logo || "/NA.png"}
                         alt={`${team.team.displayName} logo`}
                         width={48}
                         height={48}
                         className="mr-3"
                         onError={(e) => {
-                          e.currentTarget.src =
-                            "/https://www.scoreb.site/NA.png";
+                          e.currentTarget.src = "/NA.png";
                         }}
                       />
                       <div>
