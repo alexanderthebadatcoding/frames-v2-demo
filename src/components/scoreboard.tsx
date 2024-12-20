@@ -148,7 +148,9 @@ export default function Scoreboard() {
                         <span className="font-bold text-lg">
                           {team.team.shortDisplayName}{" "}
                           <p className="text-gray-600 dark:text-gray-400 font-medium inline">
-                            {team.curatedRank?.current || ""}
+                            {team.curatedRank?.current === "99"
+                              ? ""
+                              : team.curatedRank?.current || ""}
                           </p>
                           {situation?.possession === team.team.id && " 🏈"}
                         </span>
