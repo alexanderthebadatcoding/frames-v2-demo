@@ -77,7 +77,7 @@ export default function Scoreboard() {
 
   return (
     <section>
-      <h2 className="text-center text-2xl font-bold">{event.name}</h2>
+      <h2 className="text-center text-2xl font-bold mb-2">{event.name}</h2>
     
       <div className="grid grid-cols-1 gap-4">
         {event.competitors.map((player, index) => {
