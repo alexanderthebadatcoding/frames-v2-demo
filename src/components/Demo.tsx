@@ -30,7 +30,7 @@ export default function Demo() {
   }
 
   return (
-    <div className="w-[400px] mx-auto py-4">
+    <div className="w-[90%] max-w-[420px] mx-auto py-4">
       <Scoreboard />
         <div className="m-4">
           <Button onClick={close}>Close Frame</Button>
