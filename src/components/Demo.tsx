@@ -38,16 +38,9 @@ export default function Demo() {
   return (
     <div className="w-[300px] mx-auto py-4">
       <Scoreboard />
-    </div>
-
-      <div>
-        <div className="m-4">
-          <Button onClick={openUrl}>View More Scores</Button>
-        </div>
         <div className="m-4">
           <Button onClick={close}>Close Frame</Button>
         </div>
-      </div>
     </div>
   );
 }
