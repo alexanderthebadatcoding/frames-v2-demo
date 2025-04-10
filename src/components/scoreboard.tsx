@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import moment from "moment";
+import moment from "moment-timezone"; // Import moment-timezone
 
 type Competitor = {
   athlete: {
@@ -75,8 +75,8 @@ export default function Scoreboard() {
 
   return (
     <section>
-      <h2 className="text-center text-2xl font-bold my-4">{event.name}</h2>
-      <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-6">
+      <h2 className="text-center text-2xl font-bold">{event.name}</h2>
+      <p className="text-center text-sm text-gray-500 dark:text-gray-300 mb-6">
         {moment.utc(event.date).local().format("MMMM D, YYYY")}
       </p>
 
@@ -87,30 +87,29 @@ export default function Scoreboard() {
 
           // Determine Thru or Tee Time based on available data
           const thru =
-            lineScoreArray?.length
-              ? lineScoreArray.length
+          lineScoreArray?.length
+            ? lineScoreArray.length
               : teeTime
-              ? moment(teeTime).format("h:mm A")
+              ? moment.utc(teeTime).subtract(2, 'hours').format("h:mm A") // Subtract 4 hours to get UTC -4
               : "—";
 
           return (
             <div
               key={index}
-              className="bg-white dark:bg-slate-800 rounded-lg shadow p-4 flex items-center justify-between"
+              className="bg-white dark:bg-green-800 rounded-lg shadow p-4 flex items-center justify-between"
             >
               <div>
                 <p className="font-semibold text-lg">
                   {player.athlete?.displayName ?? "Unknown"}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Score: {player.score ?? "—"}
-                </p>
+                <div className="text-sm text-gray-600 dark:text-gray-300">
+                {lineScoreArray?.length ? `Thru ${thru}` : teeTime ? `Tee ${thru}` : ""}
+                </div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-bold">{thru}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  {lineScoreArray?.length ? "Thru" : teeTime ? "Tee Time" : ""}
-                </div>
+              <p className="text-xl text-gray-600 dark:text-gray-300">
+                  {player.score ?? "—"}
+                </p>
               </div>
             </div>
           );

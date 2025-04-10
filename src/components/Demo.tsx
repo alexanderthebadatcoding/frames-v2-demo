@@ -19,24 +19,19 @@ export default function Demo() {
     }
   }, [isSDKLoaded]);
 
-  const openUrl = useCallback(() => {
-    sdk.actions.openUrl("https://www.scoreb.site/");
-  }, []);
+ 
 
   const close = useCallback(() => {
     sdk.actions.close();
   }, []);
 
-  const toggleContext = useCallback(() => {
-    setIsContextOpen((prev) => !prev);
-  }, []);
 
   if (!isSDKLoaded) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="w-[300px] mx-auto py-4">
+    <div className="w-[400px] mx-auto py-4">
       <Scoreboard />
         <div className="m-4">
           <Button onClick={close}>Close Frame</Button>

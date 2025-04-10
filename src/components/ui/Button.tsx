@@ -11,7 +11,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`w-full max-w-xs mx-auto block bg-slate-900 text-white py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-slate-700 hover:bg-slate-800 ${className}`}
+      className={`w-full max-w-xs mx-auto block bg-green-900 text-white py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-600 hover:bg-green-600 ${className}`}
       {...props}
     >
       {isLoading ? (

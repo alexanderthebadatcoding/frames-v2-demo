@@ -20,10 +20,10 @@ const frame = {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Farcaster Frames v2 Demo",
+    title: "Golf Score",
     openGraph: {
-      title: "Farcaster Frames v2 Demo",
-      description: "A Farcaster Frames v2 demo app.",
+      title: "Golf Score",
+      description: "A Farcaster Frames v2 Golf Score app.",
     },
     other: {
       "fc:frame": JSON.stringify(frame),
