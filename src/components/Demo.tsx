@@ -1,8 +1,6 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import sdk from "@farcaster/frame-sdk";
 import Scoreboard from "./scoreboard";
-
-import { Button } from "~/components/ui/Button";
 
 
 export default function Demo() {
