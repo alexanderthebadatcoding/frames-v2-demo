@@ -19,22 +19,13 @@ export default function Demo() {
   }, [isSDKLoaded]);
 
  
-
-  const close = useCallback(() => {
-    sdk.actions.close();
-  }, []);
-
-
   if (!isSDKLoaded) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="w-[90%] max-w-[420px] mx-auto py-4">
+    <div className="w-[95%] max-w-[420px] mx-auto py-4">
       <Scoreboard />
-        <div className="m-4">
-          <Button onClick={close}>Close Frame</Button>
-        </div>
     </div>
   );
 }
