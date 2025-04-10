@@ -8,6 +8,7 @@ type Competitor = {
   };
   score: string;
   linescores?: Array<{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     linescores: Array<any>; // Hole-by-hole scores
     teeTime?: string; // Tee time for the round
   }>;
@@ -42,6 +43,7 @@ export default function Scoreboard() {
         const competitors = rawCompetitors.map((comp: {
           athlete: { displayName: string };
           score: string;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           linescores?: Array<{ linescores: Array<any>; teeTime?: string }>;
         }) => ({
           athlete: comp.athlete,
