@@ -7,7 +7,7 @@ const frame = {
   version: "next",
   imageUrl: "https://www.scoreb.site/og-image.png",
   button: {
-    title: "See CFB Scores",
+    title: "See Golf Scorecard",
     action: {
       type: "launch_frame",
       name: "Scoreboard Demo",
