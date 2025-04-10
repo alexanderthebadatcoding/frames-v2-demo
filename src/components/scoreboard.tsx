@@ -78,10 +78,7 @@ export default function Scoreboard() {
   return (
     <section>
       <h2 className="text-center text-2xl font-bold">{event.name}</h2>
-      <p className="text-center text-sm text-gray-500 dark:text-gray-300 mb-6">
-        {moment.utc(event.date).local().format("MMMM D, YYYY")}
-      </p>
-
+    
       <div className="grid grid-cols-1 gap-4">
         {event.competitors.map((player, index) => {
           const lineScoreArray = player.linescores?.[0]?.linescores;
