@@ -37,31 +37,8 @@ export default function Demo() {
 
   return (
     <div className="w-[300px] mx-auto py-4">
-      <h1 className="text-2xl font-bold text-center mb-4">
-        Masters Leaderboard
-      </h1>
-
-      <div className="mb-4 px-2">
-        <button
-          onClick={toggleContext}
-          className="flex items-center gap-2 transition-colors"
-        >
-          <span
-            className={`transform transition-transform ${
-              isContextOpen ? "rotate-90" : ""
-            }`}
-          >
-            ➤
-          </span>
-          Tap to view scorecard
-        </button>
-
-        {isContextOpen && (
-          <div className="mt-2">
-            <Scoreboard />
-          </div>
-        )}
-      </div>
+      <Scoreboard />
+    </div>
 
       <div>
         <div className="m-4">
