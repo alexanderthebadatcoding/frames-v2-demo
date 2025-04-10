@@ -7,11 +7,10 @@ type Competitor = {
     displayName: string;
   };
   score: string;
-  status: {
-    position: {
-      displayName: string;
-    };
-  };
+  linescores?: Array<{
+    linescores: Array<any>; // Hole-by-hole scores
+    teeTime?: string; // Tee time for the round
+  }>;
 };
 
 type Event = {
@@ -40,23 +39,15 @@ export default function Scoreboard() {
           throw new Error("No competition data available.");
         }
 
-        type RawCompetitor = {
-  athlete: {
-    displayName: string;
-  };
-  score: string;
-  status: {
-    position: {
-      displayName: string;
-    };
-  };
-};
-
-const competitors = rawCompetitors.map((comp: RawCompetitor) => ({
-  athlete: comp.athlete,
-  score: comp.score,
-  status: comp.status,
-}));
+        const competitors = rawCompetitors.map((comp: {
+          athlete: { displayName: string };
+          score: string;
+          linescores?: Array<{ linescores: Array<any>; teeTime?: string }>;
+        }) => ({
+          athlete: comp.athlete,
+          score: comp.score,
+          linescores: comp.linescores,
+        }));
 
         setEvent({
           id: rawEvent.id,
@@ -90,27 +81,40 @@ const competitors = rawCompetitors.map((comp: RawCompetitor) => ({
       </p>
 
       <div className="grid grid-cols-1 gap-4">
-        {event.competitors.map((player, index) => (
-          <div
-            key={index}
-            className="bg-white dark:bg-slate-800 rounded-lg shadow p-4 flex items-center justify-between"
-          >
-            <div>
-              <p className="font-semibold text-lg">
-                {player.athlete?.displayName ?? "Unknown"}
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Score: {player.score ?? "—"}
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="text-xl font-bold">
-                {player.status?.position?.displayName ?? "—"}
+        {event.competitors.map((player, index) => {
+          const lineScoreArray = player.linescores?.[0]?.linescores;
+          const teeTime = player.linescores?.[1]?.teeTime;
+
+          // Determine Thru or Tee Time based on available data
+          const thru =
+            lineScoreArray?.length
+              ? lineScoreArray.length
+              : teeTime
+              ? moment(teeTime).format("h:mm A")
+              : "—";
+
+          return (
+            <div
+              key={index}
+              className="bg-white dark:bg-slate-800 rounded-lg shadow p-4 flex items-center justify-between"
+            >
+              <div>
+                <p className="font-semibold text-lg">
+                  {player.athlete?.displayName ?? "Unknown"}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Score: {player.score ?? "—"}
+                </p>
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Pos</div>
+              <div className="text-center">
+                <div className="text-xl font-bold">{thru}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">
+                  {lineScoreArray?.length ? "Thru" : teeTime ? "Tee Time" : ""}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
