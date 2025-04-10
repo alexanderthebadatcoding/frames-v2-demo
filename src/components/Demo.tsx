@@ -4,7 +4,6 @@ import Scoreboard from "./scoreboard";
 
 import { Button } from "~/components/ui/Button";
 
-// https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard
 
 export default function Demo() {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
@@ -39,7 +38,7 @@ export default function Demo() {
   return (
     <div className="w-[300px] mx-auto py-4">
       <h1 className="text-2xl font-bold text-center mb-4">
-        College Football Scores
+        Masters Leaderboard
       </h1>
 
       <div className="mb-4 px-2">
@@ -54,7 +53,7 @@ export default function Demo() {
           >
             ➤
           </span>
-          Tap to view current games
+          Tap to view scorecard
         </button>
 
         {isContextOpen && (
