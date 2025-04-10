@@ -7,7 +7,6 @@ import { Button } from "~/components/ui/Button";
 
 export default function Demo() {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
-  const [isContextOpen, setIsContextOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
