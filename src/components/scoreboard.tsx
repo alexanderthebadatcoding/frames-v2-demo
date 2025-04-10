@@ -2,17 +2,23 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 
-type Player = {
-  displayName: string;
-  stats: Array<{ name: string; displayValue: string }>;
-  position: { displayValue: string };
+type Competitor = {
+  athlete: {
+    displayName: string;
+  };
+  score: string;
+  status: {
+    position: {
+      displayName: string;
+    };
+  };
 };
 
 type Event = {
   id: string;
   name: string;
   date: string;
-  leaderboard: Player[];
+  competitors: Competitor[];
 };
 
 export default function Scoreboard() {
@@ -26,20 +32,28 @@ export default function Scoreboard() {
           "https://site.api.espn.com/apis/site/v2/sports/golf/pga/scoreboard"
         );
         const data = await res.json();
-        const currentEvent = data.events?.[0];
+        const rawEvent = data.events?.[0];
+        const rawCompetition = rawEvent?.competitions?.[0];
+        const rawCompetitors = rawCompetition?.competitors ?? [];
 
-        if (!currentEvent || !currentEvent.leaderboard) {
-          throw new Error("No leaderboard data found");
+        if (!rawEvent || !rawCompetitors.length) {
+          throw new Error("No competition data available.");
         }
 
+        const competitors = rawCompetitors.map((comp: any) => ({
+          athlete: comp.athlete,
+          score: comp.score,
+          status: comp.status,
+        }));
+
         setEvent({
-          id: currentEvent.id,
-          name: currentEvent.name,
-          date: currentEvent.date,
-          leaderboard: currentEvent.leaderboard,
+          id: rawEvent.id,
+          name: rawEvent.name,
+          date: rawEvent.date,
+          competitors,
         });
       } catch (err) {
-        console.error("Error fetching scoreboard:", err);
+        console.error("Error fetching golf data:", err);
       } finally {
         setIsLoading(false);
       }
@@ -52,8 +66,8 @@ export default function Scoreboard() {
     return <div className="text-center mt-10">Loading leaderboard...</div>;
   }
 
-  if (!event || !event.leaderboard.length) {
-    return <div className="text-center mt-10">No leaderboard data available.</div>;
+  if (!event || !event.competitors.length) {
+    return <div className="text-center mt-10">No player data available.</div>;
   }
 
   return (
@@ -64,19 +78,23 @@ export default function Scoreboard() {
       </p>
 
       <div className="grid grid-cols-1 gap-4">
-        {event.leaderboard.map((player, index) => (
+        {event.competitors.map((player, index) => (
           <div
             key={index}
             className="bg-white dark:bg-slate-800 rounded-lg shadow p-4 flex items-center justify-between"
           >
             <div>
-              <p className="font-semibold text-lg">{player.displayName}</p>
+              <p className="font-semibold text-lg">
+                {player.athlete?.displayName ?? "Unknown"}
+              </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Score: {player.stats[3]?.displayValue ?? "—"}
+                Score: {player.score ?? "—"}
               </p>
             </div>
             <div className="text-center">
-              <div className="text-xl font-bold">{player.position.displayValue}</div>
+              <div className="text-xl font-bold">
+                {player.status?.position?.displayName ?? "—"}
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">Pos</div>
             </div>
           </div>
