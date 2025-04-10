@@ -40,11 +40,23 @@ export default function Scoreboard() {
           throw new Error("No competition data available.");
         }
 
-        const competitors = rawCompetitors.map((comp: any) => ({
-          athlete: comp.athlete,
-          score: comp.score,
-          status: comp.status,
-        }));
+        type RawCompetitor = {
+  athlete: {
+    displayName: string;
+  };
+  score: string;
+  status: {
+    position: {
+      displayName: string;
+    };
+  };
+};
+
+const competitors = rawCompetitors.map((comp: RawCompetitor) => ({
+  athlete: comp.athlete,
+  score: comp.score,
+  status: comp.status,
+}));
 
         setEvent({
           id: rawEvent.id,
