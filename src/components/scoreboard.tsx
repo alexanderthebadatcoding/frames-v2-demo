@@ -86,11 +86,11 @@ export default function Scoreboard() {
 
           // Determine Thru or Tee Time based on available data
           const thru =
-          lineScoreArray?.length
-            ? lineScoreArray.length
-              : teeTime
-              ? moment.utc(teeTime).subtract(2, 'hours').format("h:mm A") // Subtract 4 hours to get UTC -4
-              : "—";
+            lineScoreArray?.[2]?.value ??
+            lineScoreArray?.[1]?.value ??
+            lineScoreArray?.[0]?.value ??
+            (teeTime ? moment.utc(teeTime).subtract(2, 'hours').format("h:mm A") : "—");
+
 
           return (
             <div
