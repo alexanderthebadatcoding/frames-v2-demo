@@ -105,8 +105,12 @@ export default function Scoreboard() {
                   {player.athlete?.displayName ?? "Unknown"}
                 </p>
                 <div className="text-sm text-gray-600 dark:text-gray-300">
-                {lineScoreArray?.length ? `Thru ${thru}` : teeTime ? `Tee ${thru}` : ""}
-                </div>
+  {lineScoreArray2?.length > 0 || lineScoreArray1?.length > 0 || lineScoreArray0?.length > 0
+    ? `Thru ${thru}`
+    : teeTime
+    ? `Tee ${thru}`
+    : ""}
+</div>
               </div>
               <div className="text-center">
               <p className="text-xl text-gray-600 dark:text-gray-300">
