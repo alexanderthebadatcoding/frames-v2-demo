@@ -81,19 +81,18 @@ export default function Scoreboard() {
     
       <div className="grid grid-cols-1 gap-4">
         {event.competitors.map((player, index) => {
-          const lineScoreArray2 = competitor?.linescores?.[2]?.linescores;
-          const lineScoreArray1 = competitor?.linescores?.[1]?.linescores;
-          const lineScoreArray0 = competitor?.linescores?.[0]?.linescores;
-          const teeTime = player.linescores?.[1]?.teeTime;
+         const lineScoreArray2 = player?.linescores?.[2]?.linescores;
+         const lineScoreArray1 = player?.linescores?.[1]?.linescores;
+         const lineScoreArray0 = player?.linescores?.[0]?.linescores;
+         const teeTime = player?.linescores?.[1]?.teeTime;
 
           const thru =
           (lineScoreArray2?.length > 0 ? lineScoreArray2.length : undefined) ??
           (lineScoreArray1?.length > 0 ? lineScoreArray1.length : undefined) ??
           lineScoreArray0?.length ??
           (teeTime
-          ? moment.utc(teeTime).subtract(2, "hours").format("h:mm A")
+            ? moment.utc(teeTime).subtract(2, "hours").format("h:mm A")
           : "—");
-
 
           return (
             <div
